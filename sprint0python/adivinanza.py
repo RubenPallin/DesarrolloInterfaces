@@ -7,7 +7,7 @@ print ("c) Octubre");
 
 respuesta = input("Tu respuesta es...(a/b/c) ");
 
-if (respuesta == 'b'):
+if (respuesta.upper() == 'B'):
     print("Respuesta correcta");
     print("Has conseguido 10 puntos");
     puntuacion += 10;
@@ -23,7 +23,7 @@ print ("c) Búho");
 
 respuesta = input("Tu respuesta es...(a/b/c) ");
 
-if (respuesta == 'c'):
+if (respuesta.upper() == 'C'):
     print("Respuesta correcta");
     print("Has conseguido 10 puntos");
     puntuacion += 10;
@@ -39,7 +39,7 @@ print ("c) La ballena");
 
 respuesta = input("Tu respuesta es...(a/b/c) ");
 
-if (respuesta == 'a'):
+if (respuesta.upper() == 'A'):
     print("Respuesta correcta");
     print("Has conseguido 10 puntos");
     puntuacion += 10;
