@@ -1,5 +1,6 @@
 # README de Desarrollo de Interfaces
-![Descripción de la foto](https://github.com/RubenPallin/DI/assets/113434110/adf743dd-a140-4dc7-a4a7-1bb6295fd445)
+
+![Diseno-sin-titulo-19-copia-2-1-393x300](https://github.com/RubenPallin/DesarrolloInterfaces/assets/113434110/7bea585a-46aa-4267-8e77-7b6e9ada23a8)
 
 <h1>Índice</h1>
 <ul>
