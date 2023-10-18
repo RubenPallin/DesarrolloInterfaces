@@ -1,13 +1,15 @@
-import tkinter as tk
-from tkinter import ttk
 import threading
+from tkinter import ttk, messagebox  
+import tkinter as tk 
+from cell import Cell 
+from PIL import Image, ImageTk  
 import requests
+from window import MainWindow
 
 class LoadingWindow:
-
-    def _init_(self, root):
+    def __init__(self, root):
         self.root = root
-        self.root.title("Cangando...")
+        self.root.title("Cargando...")
         self.root.geometry("170x128")
         self.root.resizable(False, False)
 
@@ -23,10 +25,14 @@ class LoadingWindow:
 
         self.draw_progress_circle(self.progress)
 
+        self.finished = False
+        self.json_data = []
+
         self.update_progress_circle()
 
         self.thread = threading.Thread(target=self.fetch_json_data)
         self.thread.start()
+        self.check_thread()
 
     def draw_progress_circle(self, progress):
         self.canvas.delete("progress")
@@ -43,3 +49,31 @@ class LoadingWindow:
 
         self.draw_progress_circle(self.progress)
         self.root.after(100, self.update_progress_circle)
+    
+    def fetch_json_data(self):
+        github_url = "https://raw.githubusercontent.com/RubenPallin/DesarrolloInterfaces/main/recursos/catalog.json"
+
+        try:
+            response = requests.get(github_url)
+            response.raise_for_status()  # Comprueba si la solicitud fue exitosa
+
+            if response.status_code == 200:
+                self.json_data = response.json()
+                self.finished = True
+            else:
+                messagebox.showerror("Error", f"Error al descargar datos: {response.status_code}")
+        except requests.exceptions.RequestException as e:
+            # Maneja errores de solicitud, por ejemplo, si la URL es incorrecta
+            messagebox.showerror("Error", f"Error al descargar datos: {str(e)}")
+
+    def check_thread(self):
+            if self.finished:
+                self.root.destroy()
+                self.launch_main_window(self.json_data)
+            else:
+                self.root.after(100, self.check_thread)
+
+    def launch_main_window(self, json_data):
+        root = tk.Tk()
+        app = MainWindow(root,json_data)
+        root.mainloop()
