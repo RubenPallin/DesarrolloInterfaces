@@ -5,7 +5,6 @@ from cell import Cell
 from PIL import Image, ImageTk  
 from detail_window import DetailWindow 
 
-
 class MainWindow():
     # Constructor de la clase
     def __init__(self, root, json_data):
