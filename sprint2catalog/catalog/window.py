@@ -3,12 +3,14 @@ from tkinter import ttk, messagebox
 import tkinter as tk 
 from cell import Cell 
 from PIL import Image, ImageTk  
-from detail_window import DetailWindow  
+from detail_window import DetailWindow 
 
 
 class MainWindow():
     # Constructor de la clase
-    def __init__(self, root):
+    def __init__(self, root, json_data):
+        self.root = root
+        self.json_data = json_data
         # Configura el título de la ventana principal
         root.title("5 personajes protagonistas")
         self.root = root  # Almacena la ventana raíz en una variable de instancia "self.root"
