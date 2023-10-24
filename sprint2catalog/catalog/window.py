@@ -15,6 +15,10 @@ class MainWindow():
         root.title("5 personajes protagonistas")
         self.root = root  # Almacena la ventana raíz en una variable de instancia "self.root"
 
+        x = (self.root.winfo_screenwidth() - self.root.winfo_reqwidth()) / 2
+        y = (self.root.winfo_screenheight() - self.root.winfo_reqheight()) / 2
+        self.root.geometry("{}x{}+{}+{}".format(120, 120, int(x), int(y))) 
+
         # Crea una lista de objetos "Cell" que representan a los personajes protagonistas
         self.cells = []
         for data in self.json_data:
