@@ -14,6 +14,7 @@ class MainWindow():
         # Configura el título de la ventana principal
         root.title("5 personajes protagonistas")
         self.root = root  # Almacena la ventana raíz en una variable de instancia "self.root"
+        self.setup_menu_ayuda()
 
         x = (self.root.winfo_screenwidth() - self.root.winfo_reqwidth()) / 2
         y = (self.root.winfo_screenheight() - self.root.winfo_reqheight()) / 2
@@ -36,6 +37,18 @@ class MainWindow():
             label = ttk.Label(root, image=cell.image_tk, text=cell.title, compound=tk.BOTTOM)
             label.grid(row=i, column=0)
             label.bind("<Button-1>", lambda event, cell=cell: self.show_detail_window(cell))  # Vincula el clic izquierdo a la función "show_detail_window"
+
+    def setup_menu_ayuda(self):
+        # Configura un menú en la ventana principal con una opción para mostrar información sobre el desarrollador.
+        def show_about_dialog():
+            messagebox.showinfo("Acerca de", "Información acerca del desarrollador.")
+
+        menubar = tk.Menu(self.root)
+        helpmenu = tk.Menu(menubar, tearoff=0)
+        helpmenu.add_command(label="Acerca de", command=show_about_dialog)
+        menubar.add_cascade(label="Ayuda", menu=helpmenu)
+
+        self.root.config(menu=menubar)
 
     def show_detail_window(self, cell):
         # Muestra la ventana de detalles cuando se hace clic en una celda
