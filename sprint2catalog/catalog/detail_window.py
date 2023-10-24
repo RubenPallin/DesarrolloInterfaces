@@ -26,3 +26,10 @@ class DetailWindow:
         description_label = ttk.Label(self.detail_window, text=self.cell.description, wraplength=300)
         description_label.pack()
 
+        # Crea y muestra una etiqueta con la descripción.
+        self.root.update_idletasks()
+        x = ( self.root.winfo_screenwidth() - self.root.winfo_reqwidth()) / 2
+        y = ( self.root.winfo_screenheight() - self.root.winfo_reqheight()) / 2
+        self.root.geometry(f"+{int(x)}+{int(y)}")
+
+
