@@ -1,41 +1,33 @@
 import tkinter as tk
 import requests
 from PIL import Image, ImageTk
+from detail_window import DetailWindow
 
+class Cell:
+    import tkinter as tk
+from PIL import Image, ImageTk
+from io import BytesIO
+import requests
 
 class Cell:
     def __init__(self, title, image_url, description):
         self.title = title
-        self.image_path = self.download_image(image_url)  # Descarga la imagen y obtiene la ruta local
+        self.image_url = image_url
         self.description = description
         self.load_image()
 
-    def download_image(self, image_url):
+    def load_image(self):
         try:
-            response = requests.get(image_url)
+            response = requests.get(self.image_url)
             response.raise_for_status()
 
-            if response.status_code == 200:
-                image_data = response.content
-                image_filename = "local_image.jpg"  # Puedes definir un nombre de archivo local
-                with open(image_filename, "wb") as image_file:
-                    image_file.write(image_data)
-                return image_filename
-            else:
-                print(f"Error al descargar la imagen: {response.status_code}")
-        except requests.exceptions.RequestException as e:
+            image_data = BytesIO(response.content)
+            image = Image.open(image_data)
+            image = image.resize((100, 100), Image.LANCZOS)
+            self.image_tk = ImageTk.PhotoImage(image)
+        except (requests.RequestException, Exception) as e:
             print(f"Error al cargar la imagen: {e}")
-        return None
-
-    def load_image(self):
-        if self.image_path:
-            try:
-                image = Image.open(self.image_path)
-                # Redimensiona la imagen a 100x100 píxeles
-                image = image.resize((100, 100), Image.LANCZOS)
-                self.image_tk = ImageTk.PhotoImage(image)
-            except Exception as e:
-                print(f"Error al cargar la imagen: {e}")
-                self.image_tk = None
-        else:
-            self.image_tk = None
+            # Cargar una imagen de reemplazo en caso de error
+            self.image_tk = ImageTk.PhotoImage(Image.new("RGB", (100, 100), (255, 255, 255)))
+    def create_detail_window(self, root):
+        detail_window = DetailWindow(root, self.title, self.image_path, self.description)
