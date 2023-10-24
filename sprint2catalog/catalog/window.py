@@ -1,9 +1,8 @@
 # Importación de bibliotecas
-from tkinter import ttk, messagebox  
-import tkinter as tk 
-from cell import Cell 
-from PIL import Image, ImageTk  
-from detail_window import DetailWindow 
+from tkinter import ttk, messagebox
+import tkinter as tk
+from cell import Cell
+from detail_window import DetailWindow
 import requests
 from io import BytesIO
 
@@ -19,17 +18,21 @@ class MainWindow():
         # Crea una lista de objetos "Cell" que representan a los personajes protagonistas
         self.cells = []
         for data in self.json_data:
-            #extraigo los datos de cada JSONObject 
+            # Extraigo los datos de cada JSONObject
             nombre = data.get("name")
             descripcion = data.get("description")
-                #estos dos pasos son para "descargar" la imagen y no enviarla como un url
+            # Estos dos pasos son para "descargar" la imagen y no enviarla como una URL
             image_url = data.get("image_url")
-            
-            #creo una celda para cada dato(object) y la incluyo en una lista
+
+            # Creo una celda para cada dato (object) y la incluyo en una lista
             self.cells.append(Cell(nombre, image_url, descripcion))
 
         # Bucle para mostrar las celdas en la ventana
         for i, cell in enumerate(self.cells):
             label = ttk.Label(root, image=cell.image_tk, text=cell.title, compound=tk.BOTTOM)
             label.grid(row=i, column=0)
-            label.bind("<Button-1>", lambda event, cell=cell: cell.create_detail_window(root))  # Vincula el clic izquierdo a la función "onButtonClicked"
+            label.bind("<Button-1>", lambda event, cell=cell: self.show_detail_window(cell))  # Vincula el clic izquierdo a la función "show_detail_window"
+
+    def show_detail_window(self, cell):
+        # Muestra la ventana de detalles cuando se hace clic en una celda
+        detail_window = DetailWindow(self.root, cell)
