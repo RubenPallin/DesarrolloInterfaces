@@ -34,6 +34,13 @@ class LoadingWindow:
         self.thread.start()
         self.check_thread()
 
+        # Configura el tamaño y la posición de la ventana de carga (LoadWindow)
+        # Se ajusta al tamaño de la pantalla del equipo
+        x = ( self.root.winfo_screenwidth() - self.root.winfo_reqwidth()) / 2
+        y = ( self.root.winfo_screenheight() - self.root.winfo_reqheight()) / 2
+        self.root.geometry(f"+{int(x)}+{int(y)}")
+
+
     def draw_progress_circle(self, progress):
         self.canvas.delete("progress")
         angle = int(360 * (progress / 100))
