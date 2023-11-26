@@ -68,6 +68,13 @@ public class MainActivity extends AppCompatActivity implements Select_Listener{
     @Override
     public void onItemClick(ProtagonistasData allTheProtas) {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        String title = allTheProtas.getName();
+        String url = allTheProtas.getImageUrl();
+        String description = allTheProtas.getDescription();
+
+        intent.putExtra(DetailActivity.TITLE, title);
+        intent.putExtra(DetailActivity.URL, url);
+        intent.putExtra(DetailActivity.DESCRIPTION, description);
         startActivity(intent);
     }
 }

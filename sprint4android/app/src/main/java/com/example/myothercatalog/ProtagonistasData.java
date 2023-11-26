@@ -6,11 +6,13 @@ import org.json.JSONObject;
 public class ProtagonistasData {
     private String name;
     private String imageUrl;
+    private String description;
 
     public ProtagonistasData(JSONObject json){
         try{
             this.name=json.getString("name");
             this.imageUrl=json.getString("image_url");
+            this.description = json.getString("description");
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -23,5 +25,8 @@ public class ProtagonistasData {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+    public String getDescription() {
+        return description;
     }
 }
