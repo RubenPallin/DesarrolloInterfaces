@@ -22,8 +22,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.content.Intent;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements Select_Listener{
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -48,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-                        ProtagonistasRecyclerViewAdapter adapter = new ProtagonistasRecyclerViewAdapter(allTheProtas, activity);
+                        ProtagonistasRecyclerViewAdapter adapter = new ProtagonistasRecyclerViewAdapter(allTheProtas, activity, MainActivity.this );
                         recyclerView.setAdapter(adapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
                     }
@@ -61,5 +63,11 @@ public class MainActivity extends AppCompatActivity {
         });
         RequestQueue cola = Volley.newRequestQueue(this);
         cola.add(request);
+    }
+
+    @Override
+    public void onItemClick(ProtagonistasData allTheProtas) {
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        startActivity(intent);
     }
 }

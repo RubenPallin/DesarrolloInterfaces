@@ -1,6 +1,7 @@
 package com.example.myothercatalog;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,12 @@ public class ProtagonistasRecyclerViewAdapter extends RecyclerView.Adapter<Prota
 
     private List<ProtagonistasData> allTheData;
     private Activity activity;
+    private Select_Listener select_listener;
 
-    public ProtagonistasRecyclerViewAdapter(List<ProtagonistasData> dataSet, Activity activity){
-        this.allTheData = dataSet;
+    public ProtagonistasRecyclerViewAdapter(List<ProtagonistasData> allTheData, Activity activity, Select_Listener listener) {
+        this.allTheData = allTheData;
         this.activity = activity;
+        this.select_listener = listener;
     }
 
     @NonNull
@@ -32,6 +35,13 @@ public class ProtagonistasRecyclerViewAdapter extends RecyclerView.Adapter<Prota
     public void onBindViewHolder(@NonNull ProtagonistasViewHolder holder, int position) {
         ProtagonistasData dataInPositionToBeRendered = allTheData.get(position);
         holder.showData(dataInPositionToBeRendered, activity);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                select_listener.onItemClick(dataInPositionToBeRendered);
+            }
+        });
     }
 
     @Override
