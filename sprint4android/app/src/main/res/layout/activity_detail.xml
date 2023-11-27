@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    tools:context=".DetailActivity"
+    style="@style/title_color_style">
 
     <TextView
         android:id="@+id/textTitle"
@@ -16,8 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        />
+        android:gravity="center" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_detail_activity"
