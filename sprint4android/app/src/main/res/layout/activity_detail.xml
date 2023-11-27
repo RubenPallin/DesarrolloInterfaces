@@ -9,6 +9,7 @@
 
     <TextView
         android:id="@+id/textTitle"
+        style="@style/TitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
